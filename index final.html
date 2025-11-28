@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Completa</title>
+    <style>
+        body {
+            margin: 20;
+            font-family: Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+            background: #dfe1dfe5;
+            color: #000000;
+            scroll-behavior: smooth;
+        }
+
+        /* ====== Encabezado ====== */
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #023859;
+            color: #A7EBF2;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Barra superior */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: #051824;
+            color: #fff;
+        }
+
+        .top-bar button,
+        .top-bar input {
+            font-size: 16px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .top-bar button {
+            cursor: pointer;
+            background: #505669;
+            color: #fff;
+            transition: background 0.3s;
+        }
+
+        .top-bar button:hover {
+            background: #f00a0a;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 5px;
+        }
+
+        .search-box input {
+            width: 200px;
+        }
+
+        /* Menú lateral */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #051824;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #5718eb56;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        /* Apartados */
+        section {
+            padding: 60px 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        /* ====== Barra de satisfacción ====== */
+        .feedback {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #eee;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stars {
+            display: flex;
+            gap: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .stars span {
+            color: #ccc;
+            transition: color 0.3s;
+        }
+
+        .stars span.selected {
+            color: rgb(251, 255, 0);
+        }
+
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        .feedback button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #444;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .feedback button:hover {
+            background: #666;
+        }
+
+        /* ====== Modo oscuro ====== */
+        body.dark {
+            background: #181818;
+            color: #f5f5f5;
+        }
+
+        body.dark header {
+            background: #55040c;
+            color: #eeeeee;
+        }
+
+        body.dark .top-bar {
+            background: #b4303b;
+        }
+
+        body.dark .top-bar button {
+            background: #222;
+            color: #fff;
+        }
+
+        body.dark .top-bar button:hover {
+            background: #444;
+        }
+
+        body.dark .search-box input {
+            background: #fcfbfb;
+            color: #fff;
+        }
+
+        body.dark section {
+            background: #3e3f37;
+            color: #eee;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark .feedback {
+            background: #222;
+            color: #eee;
+            border: 1px solid #444;
+        }
+
+        body.dark textarea {
+            background: #c0baba;
+            color: #fff;
+            border: 1px solid #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        🌐 Aplicacion de la Tecnologia en distintas ramas
+    </header>
+
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <button onclick="openMenu()">☰ Menú</button>
+
+        <!-- Buscador -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar..." oninput="toggleClearButton()">
+            <button onclick="buscar()">🔍</button>
+            <button id="clearBtn" onclick="limpiarBuscador()" style="display:none;">❌</button>
+        </div>
+
+        <button onclick="toggleDarkMode()">🌙 / ☀️</button>
+    </div>
+
+    <!-- Menú lateral -->
+    <div id="mySidebar" class="sidebar">
+        <span class="close-btn" onclick="closeMenu()">&times;</span>
+        <a href="#mecanica" onclick="closeMenu()">Mecanica</a>
+        <a href="#inteligencia IA" onclick="closeMenu()">Inteligencia Artificial</a>
+        <a href="#comunicasion" onclick="closeMenu()">Comunicasion</a>
+        <a href="#medicina" onclick="closeMenu()">Medicina</a>
+        <a href="#biotecnologia" onclick="closeMenu()">Biotecnologia</a>
+        <a href="#contacto" onclick="closeMenu()">Contacto</a>
+        <a href="#feedback" onclick="closeMenu()">Feedback</a>
+    </div>
+
+    <!-- Apartados -->
+    <section id="mecanica">
+        <h2>Mecanica</h2>
+
+
+        <p>Mecaacutenica es un término que deriva del latín tardío mechanĭca, a su vez procedente del vocablo griego
+            <i><b>mēchanikḗ.</b></i>
+            El concepto tiene varios usos de acuerdo al contexto.
+        </p>
+
+        <p>Se llama mecánica a la rama de la física centrada en el movimiento y el equilibrio de los cuerpos que se
+            encuentran bajo la influencia de una fuerza. Se trata, por lo tanto, del estudio del desplazamiento y el
+            reposo
+            de los objetos que están sometidos a fuerzas.</p>
+
+        <p>El concepto de fuerza también pertenece a la física y se define como una magnitud expresada a través del uso
+            de
+            vectores para medir la razón de de cambio de cantidad de movimiento (también llamado ímpetu, momentum o
+            momento
+            lineal) que tiene lugar entre un par de sistemas de partículas o partículas individuales. La definición
+            clásica
+            nos dice que la fuerza es cualquier agente que pueda alterar dicha cantidad o la forma de un material.</p>
+
+        <p>En la actualidad, en el concepto de mecánica también incluimos la evolución de sistemas físicos (agregados de
+            entidades materiales u objetos que se encuentren interconectados o que interactúen) más allá de los cuerpos
+            másicos, los únicos contemplados en el pasado. De este modo, la mecánica también se enfoca en el estudio de
+            las
+            ecuaciones de movimiento de los sistemas cuánticos y los campos electromagnéticos, entre otros, donde no hay
+            cuerpos físicos, precisamente.</p>
+
+        <p>De acuerdo a sus características es posible diferenciar entre la mecánica clásica, la mecánica cuántica, la
+            mecánica analítica y la mecánica vectorial, entre otras. Sus saberes además dan lugar a otras disciplinas,
+            como
+            la biomecánica y la ingeniería electromecánica.</p>
+
+        <p>La mecánica clásica incluye la del sólido rígido y la de medios continuos, entre otras áreas de estudio. La
+            mecánica de medios continuos se encarga de los cuerpos materiales extensos deformables, e incluye fenómenos
+            como
+            la plasticidad, la elasticidad y la viscoelasticidad, teorías como la hidrostática, la hidráulica y la
+            hidrodinámica.</p>
+
+        <img class="img" src="https://ospina.com.br/wp-content/uploads/2024/09/blog-ospina1.jpg"
+            alt="Vista lateral de un auto" usemap="#carparts-wiki">
+
+        <map name="carparts-wiki">
+
+            <area shape="rect" coords="20, 150, 100, 250" href="https://es.wikipedia.org/wiki/Faro_(automóvil)"
+                alt="Faro delantero" title="Ir a Wikipedia: Faro (automóvil)">
+
+            <area shape="rect" coords="150, 100, 350, 350" href="https://es.wikipedia.org/wiki/Puerta"
+                alt="Puerta del conductor" title="Ir a Wikipedia: Puerta (General)">
+
+            <area shape="circle" coords="400, 400, 60" href="https://es.wikipedia.org/wiki/Rueda" alt="Rueda delantera"
+                title="Ir a Wikipedia: Rueda">
+
+            <area shape="default" href="https://es.wikipedia.org/wiki/Automóvil" alt="Información general del automóvil"
+                title="Ir a Wikipedia: Automóvil">
+
+        </map>
+
+        <p>La mecánica cuántica, por otra parte, se centra en los sistemas mecánicos con energía de escaso tamaño para
+            los
+            cuales la mecánica clásica no puede aplicarse. Por ejemplo, no es compatible con el principio según el cual
+            el
+            estado futuro de un sistema está completamente ligado al actual, ya que su evolución puede tener lugar de
+            forma
+            no determinista. También es posible hablar de mecánica estadística cuántica, que incluye ciertas
+            restricciones
+            al tratar los agregados de partículas.</p>
+
+        <p>MecánicaLa mecánica analítica, en cambio, es una formulación general y abstracta de la clásica gracias a la
+            cual
+            es posible usar sistemas inerciales y no inerciales bajo las mismas condiciones sin que se altere la
+            ecuación de
+            movimiento básica.</p>
+
+        <p>Muchas veces, al menos en el lenguaje coloquial, cuando se habla de mecánica se hace referencia
+            específicamente
+            a la mecánica automotriz: es decir, a los principios y sistemas que permiten generar y transmitir movimiento
+            en
+            los vehículos de tracción mecánica. Así, expresiones como No sé nada de mecánica o Debo ir al mecánico
+            suelen vincularse al funcionamiento de un automóvil.</p>
+
+        <p>Por otra parte, aquello que se ejecuta con una máquina o a través de un mecanismo es calificado como
+            mecánico.
+            Por ejemplo: «Para remover la roca se utilizó una pala mecánica, El nuevo centro comercial cuenta con
+            cuatro
+            escaleras mecánicas, La recolección de las frutas se hace de manera mecánica.</p>
+
+        <p>La mecánica, por último, es el conjunto de normas que regulan una actividad o una acción: De acuerdo a la
+            mecánica del concurso, los cuatro participantes más votados clasificarán a la instancia final, Por pedido de
+            los jugadores, el entrenador decidió modificar la mecánica de los entrenamientos, La mecánica de nuestro
+            trabajo hace que las últimas horas de la jornada sean las más intensas».</p>
+
+        <html lang="es">
+
+        <head>
+            <meta charset="UTF-8">
+            <title>Tabla moderna</title>
+            <style>
+                table {
+                    border: 5px solid black;
+                    /* Borde de la tabla */
+                    border-collapse: separate;
+                    /* Permite separación (como CELLSPACING) */
+                    border-spacing: 15px;
+                    /* Equivale a CELLSPACING */
+                    width: 60%;
+                    /* Ajusta tamaño */
+                    margin: 20px auto;
+                    /* Centra la tabla */
+                }
+
+                caption {
+                    caption-side: top;
+                    /* Puede ser "top" o "bottom" */
+                    font-weight: bold;
+                    margin: 10px;
+                    font-size: 1.2em;
+                }
+
+                td,
+                th {
+                    border: 2px solid #333;
+                    /* Borde de las celdas */
+                    padding: 20px;
+                    /* Equivale a CELLPADDING */
+                    text-align: center;
+                    /* Equivale a ALIGN */
+                    vertical-align: top;
+                    /* Equivale a VALIGN */
+                }
+
+                th {
+                    background: #eee;
+                }
+            </style>
+        </head>
+
+        <body>
+
+            <table>
+                <caption>piexas y funcionalidades</caption>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Enlace</th>
+                    <th>Texto</th>
+                </tr>
+                <tr>
+                    <td><img src="data:image/jpeg;base64,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"
+                            alt="Ejemplo" width="80"></td>
+                    <td><a href="index.html">Mi página principal</a></td>
+                    <td> puede referirse a la banda de distribución (o de tiempo), que sincroniza el cigüeñal con el
+                        árbol de levas para el funcionamiento del motor, o a la banda de accesorios (o de transmisión),
+                        que transmite la potencia del motor a componentes como el alternador, la bomba de agua y el
+                        compresor de aire acondicionado.</td>
+
+                </tr>
+            </table>
+
+        </body>
+
+        </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabla de Piezas de Vehículo</title>
+</head>
+<body>
+
+<div id="tabla-contenedor"></div>
+
+<script>
+// Datos de ejemplo
+const piezas = [
+  { nombre: "Alternador", caracteristicas: "12V, 90A, carcasa aluminio", precio: "$2,500 MXN" },
+  { nombre: "Bomba de gasolina", caracteristicas: "Alta presión, compatible EFI", precio: "$1,800 MXN" },
+  { nombre: "Pastillas de freno", caracteristicas: "Cerámicas, alto rendimiento", precio: "$900 MXN" }
+];
+
+// Crear tabla
+const tabla = document.createElement("table");
+tabla.border = "1";
+tabla.style.borderCollapse = "collapse";
+tabla.style.width = "100%";
+
+// Encabezados
+const encabezados = ["Nombre", "Características", "Precio"];
+const thead = document.createElement("thead");
+const trHead = document.createElement("tr");
+
+encabezados.forEach(texto => {
+  const th = document.createElement("th");
+  th.textContent = texto;
+  th.style.padding = "8px";
+  trHead.appendChild(th);
+});
+
+thead.appendChild(trHead);
+tabla.appendChild(thead);
+
+// Cuerpo de la tabla
+const tbody = document.createElement("tbody");
+
+piezas.forEach(pieza => {
+  const tr = document.createElement("tr");
+
+  Object.values(pieza).forEach(valor => {
+    const td = document.createElement("td");
+    td.textContent = valor;
+    td.style.padding = "8px";
+    tr.appendChild(td);
+  });
+
+  tbody.appendChild(tr);
+});
+
+tabla.appendChild(tbody);
+
+// Insertar tabla en el contenedor
+document.getElementById("tabla-contenedor").appendChild(tabla);
+</script>
+
+</body>
+</html>
+    </section>
+
+
+    <section id="inteligencia IA">
+        <h2>Inteligencia IA</h2>
+        <h1>
+            <p>
+                <center>¿Que son los inteligencias artificiales?</center>
+            </p>
+        </h1>
+
+        <p><b> Artificial (IA) </b> la simulación de la inteligencia humana en máquinas para
+            realizar tareas que normalmente requieren capacidades cognitivas humanas, como el aprendizaje, la
+            resoluciónde problemas, el reconocimiento de patrones y la toma de decisiones.</p>
+
+        <p>Estos sistemas analizan datos, se adaptan a su entorno y pueden actuar de manera autónoma para
+            lograr objetivos específicos, abarcando aplicaciones que van desde el reconocimiento de lenguaje
+            hasta el control de sistemas comple.</p>
+
+
+        <center> <img width="500"
+                src="https://blog.peoplenext.com/hs-fs/hubfs/inteligencia%20artificial%20vs%20inteligencia%20humana_imgdest.jpg?width=600&name=inteligencia%20artificial%20vs%20inteligencia%20humana_imgdest.jpg"
+                alt="inteligence"></center>
+
+        <h2>
+            <p>
+                <center>¿Que tipo de inteligencias existen?</center>
+            </p>
+        </h2>
+
+        <p>Inteligencia Artificial Estrecha (ANI) o Débil:
+            Es el tipo de IA que existe hoy en día. Se especializa en realizar una tarea espec&iacutefica o un conjunto
+            limitado de tareas, como
+            reconocer rostros o voz, hacer recomendaciones de contenido, o la operación de asistentes virtuales.
+
+        </p>
+
+        <p>Inteligencia Artificial General (AGI) o Fuerte:
+            Es una forma teórica de IA que poseería la capacidad de comprender, aprender y aplicar la inteligencia a
+            cualquier problema,
+            de la misma forma que lo haría un ser humano.</p>
+
+        <p>Superinteligencia Artificial (ASI):
+            Se refiere a una IA que ir&iacutea más allá de la inteligencia humana en todas las áreas. Al igual que la IA
+            general, la superinteligencia
+            es un concepto teórico. </p>
+
+        <p>Clasificación por Funcionalidad
+            Esta clasificación se enfoca en cómo opera una IA y sus posibles etapas de desarrollo. </p>
+
+        <p>Reactiva:
+            El tipo de IA más básico, no tiene memoria ni capacidad de aprender del pasado. Realiza acciones en
+            respuesta a est&iacutemulos inmediatos,
+            como los programas de ajedrez que solo reaccionan a la jugada actual. </p>
+
+        <p>IA de Memoria Limitada:
+            Este tipo de IA puede usar experiencias pasadas para tomar decisiones futuras. Por ejemplo, los
+            veh&iacuteculos
+            autónomos utilizan este tipo
+            de IA para observar su entorno y tomar decisiones basadas en datos recientes. </p>
+
+        <p>IA de Teor&iacutea de la Mente:
+            Un nivel más avanzado y aún en desarrollo, esta IA podría entender las emociones y pensamientosde los
+            humanos. </p>
+
+        <p>IA Autoconsciente:
+            La etapa más teórica de la IA, en la que el sistema no solo entender&iacutea las emociones humanas, sino que
+            también poseería sus propias
+            emociones, creencias y autoconciencia. </p>
+
+        <h1>
+            <p>
+                <center>¿Por que la tecnologia es aplicada en la creacion de inteligencias artificiales?</center>
+            </p>
+        </h1>
+
+        <p>La tecnolog&iacutea es fundamental para crear inteligencias artificiales (IA) porque estas máquinas simulan
+            la
+            inteligencia humana y
+            requieren hardware potente (como computadoras y sensores), grandes volúmenes de datos para aprender, y
+            algoritmos avanzados (como
+            las redes neuronales) para procesar esa información y tomar decisiones autónomas. Sin estas bases
+            tecnológicas, sería imposible que
+            las máquinas percibieran, resolvieran problemas, comprendieran el lenguaje o realizaran tareas complejas
+            de
+            forma inteligente. </p>
+
+        <b>Tipos de Inteligencia Artificial</b>
+
+        <p>Según la definición de Inteligencia Artificial de la Comisión Europea existen dos tipo de IA:</p>
+
+        <p>Software: asistentes virtuales, software de análisis de imágenes, motores de búsqueda o sistemas de
+            reconocimiento de voz y rostro.
+            Inteligencia artificial integrada: robots, drones, vehículos autónomos o el Internet de las Cosas.
+            No es la única clasificación posible de los tipos de Inteligencia Artificial que existe. En su libro
+            "Inteligencia Artificial: Un Enfoque Moderno", Stuart J. Russell y Peter Norvig establecen cuatro tipos de
+            inteligencia artificial:</p>
+
+        <p><b>Sistemas que piensan como humanos: se enfocan en la emulación de la inteligencia humana, tanto en términos
+                de
+                comportamiento como de pensamiento.</b> Buscan imitar la forma en que los humanos piensan y resuelven
+            problemas.
+            Sistemas que actúan como humanos: se enfocan en la emulación de la inteligencia humana, pero en términos de
+            comportamiento. </p>
+
+        <p><b> Buscan imitar la forma en que los humanos se comportan y actúan en el mundo.
+                Sistemas que piensan racionalmente: </b> enfocan en la resolución de problemas de manera lógica y
+            racional. Buscan
+            maximizar la eficiencia y la precisión de sus decisiones, sin considerar necesariamente el comportamiento
+            humano.</p>
+
+        <p> que actúan racionalmente: se enfocan en la toma de decisiones y la acción en el mundo, buscando siempre
+            tomar la mejor decisión posible basada en la información disponible.</p>
+
+        <p>IA Fuerte: está diseñada para tener una amplia gama de habilidades cognitivas y capacidad de aprendizaje
+            autónomo. Estos sistemas pueden realizar múltiples tareas y aprenden de forma autónoma a medida que
+            interactúan
+            con el entorno. La IA fuerte tiene que tener la capacidad de razonar, planificar y tomar decisiones
+            complejas en
+            un amplio espectro de situaciones.</p>
+
+        <p>Super inteligente: es un tipo de IA que superaría la inteligencia humana en todos los aspectos. Este nivel de
+            IA sería capaz de comprender el mundo de una manera que está más allá de la capacidad humana, y sería capaz
+            de
+            resolver problemas complejos a una velocidad y eficiencia que los seres humanos no pueden alcanzar. Es una
+            forma
+            teórica de IA que aún no ha sido desarrollada en la práctica.</p>
+
+        <hr>
+        <p>
+        <h2><i>¿Como funciona la inteligencia artificial?</h2>
+        </p></i>
+        <h4>La IA funciona a través de la programación de sistemas para que analicen y aprendan de los datos,
+            permitiéndoles:
+            Ver y reconocer objetos: Capacidad para identificar elementos visuales en imágenes y videos.
+            Entender y responder al lenguaje: Procesamiento del lenguaje hablado y escrito para interactuar y responder
+            preguntas.
+            Aprender y tomar decisiones: Capacidad de aprender de la nueva información y tomar decisiones inteligentes
+            basadas en
+            experiencias previas.
+            Hacer recomendaciones: Generar sugerencias personalizadas para usuarios y expertos.</h4>
+        </p>
+        <hr>
+
+
+        <!--Historia de la Inteligencia artificial-->
+
+
+
+
+        <hr>
+        <p><i>
+                <h2>Como nace la inteligencia artificial</h2>
+            </i></p>
+        La inteligencia artificial (IA) fue creada oficialmente en 1956, durante la Conferencia de Dartmouth, donde el
+        término
+        fue acuñado por John McCarthy
+
+
+        <p></p>Sin embargo, las bases te&oacute;ricas se remontan a 1950 con el artículo de Alan Turing y el artículo de
+        McCulloch y
+        Pitts de 1943 sobre neuronas artificiales, que sentaron las bases de la disciplina
+
+
+        <p></p>1943: Se publica el modelo de neuronas artificiales de Warren McCulloch y Walter Pitts, considerado uno
+        de los
+        primeros
+        trabajos precursores de la IA.
+
+
+        <p></p>1950: Alan Turing publica su influyente artículo “Computing Machinery and Intelligence”, en el que
+        propone el
+        concepto
+        del "test de Turing" para medir la inteligencia de una máquina.
+
+
+        <p></p>1956: La Conferencia de Dartmouth es considerada el punto de partida oficial de la IA
+
+
+        <p></p>Durante este evento, John McCarthy acuñó formalmente el término "inteligencia artificial" y se
+        presentaron los
+        primeros
+        programas de IA, como el Logic Theorist
+
+        <hr>
+        <p>
+        <h2><i>2. Primeras Ideas de IA (1950-1960)</i></h2>
+        </p>
+
+        <p></p>El término "inteligencia artificial" fue acuñado en 1956 por John McCarthy, uno de los pioneros del
+        campo.
+        Durante este
+        período se realizaron algunos avances importantes:
+
+        <p>Alan Turing (1936-1950s): En su famoso trabajo "On Computable Numbers", Turing presentó la idea de la máquina
+            de
+            Turing,
+            un modelo matemático que define lo que significa "calcular"
+            En 1950, publicó el ensayo "Computing Machinery and Intelligence", en el que propuso el ahora famoso Test de
+            Turing,
+            una
+            prueba para evaluar si una máquina puede simular la inteligencia humana.</p>
+        <p>Conferencia de Dartmouth (1956): Este evento se considera el nacimiento formal de la IA como campo académico
+            esta conferencia, John McCarthy, Marvin Minsky, Nathaniel Rochester y Claude Shannon propusieron que "cada
+            aspecto
+            del aprendizaje o cualquier otro rasgo</p>
+        <hr>
+        <center><img width="600"
+                src="https://www.bigdata.uma.es/wp-content/uploads/2023/01/uma-origenes-ia-02-825x460.jpg">
+        </center>
+        <hr>
+
+
+        <center><img width="700"
+                src="https://assets.sutori.com/user-uploads/image/8f7263b4-8b8b-4e03-a484-c7bf951fdc1c/Arthur-Samuel1.jpeg"
+                </center>
+
+            <h2>
+                <p>3. Primeras Décadas de Desarrollo (1960-1980)
+            </h2>
+
+            <p></p> Durante los años 60 y 70, los investigadores en IA lograron algunos avances, pero también
+            enfrentaron varios
+            desafíos.
+
+            <P></P>Programas como ELIZA (1964): Un programa de procesamiento de lenguaje natural creado por Joseph
+            Weizenbaum
+            que simulaba una conversación entre un paciente y un terapeuta
+            Aunque muy simple, fue un hito en la interacción humano-máquina.
+
+            <p></p>La IA simbólica: Muchos de los primeros enfoques de la IA se basaron en reglas explícitas y
+            representaciones
+            simbólicas
+            del conocimiento
+            Los programas intentaban imitar la razón humana utilizando lógica formal.
+
+            <p></p>"Inviernos de la IA": A pesar de algunos avances, la IA no logró alcanzar las expectativas de la
+            época, lo
+            que generó
+            decepción en los financiadores
+            y en la comunidad científica, resultando en periodos de desinterés y recortes en la financiacion.</p>
+            <center><img width="600"
+                    src="https://welowmarketing.com/wp-content/uploads/2024/09/origen-inteligencia-artificial-ia.jpg"
+                    </center>
+
+                conoció como los "inviernos de la IA".
+
+                <h2>4. La Revolución de la IA (1990-2010)</h2>
+
+                A partir de los años 90, los avances en poder de computación y el desarrollo de nuevas técnicas de
+                aprendizaje permitieron avances significativos.
+
+                <p></p><b>Aprendizaje automático (machine learning): </b> lugar de basarse en reglas preprogramadas, los investigadores
+                comenzaron a centrarse en el aprendizaje automático, donde las máquinas mejoran su rendimiento mediante la exposición a datos. Un hito fue el algoritmo
+                Backpropagation para entrenar redes neuronales, lo que permitió avances en el campo del aprendizaje profundo.
+
+                <p></p>IA en juegos: En 1997, la IA de Deep Blue de IBM derrotó al campeón mundial de ajedrez Garry Kasparov,
+                demostrando que las máquinas podían competir con humanos en tareas cognitivas complejas.
+
+                <p></p>Reconocimiento de voz y visión computacional: El desarrollo de sistemas como Siri (2011) de Apple y el
+                avance en redes neuronales convolucionales (CNN) para reconocimiento de imágenes también marcó grandes avances en la IA aplicada.
+
+                <hr>
+
+                <center><img width="600"
+                        src="https://a.files.bbci.co.uk/worldservice/live/assets/images/2015/07/31/150731142615_tecnologia_robots_humanos_prueba_turing_624x351_getty.jpg"
+                        </center>
+                    <hr>
+
+                    <h2>5. Era Moderna (2010-Presente)</h2>
+
+                    <p> La IA ha experimentado un crecimiento impresionante
+
+                        Redes neuronales profundas (Deep Learning): Desde 2012, las redes neuronales profundas han
+                        transformado la IA,
+                        impulsando avances en el procesamiento del lenguaje natural (como GPT y BERT), visión por
+                        computadora
+                        (reconocimiento
+                        facial), y generación de imágenes (como DALL·E).
+
+                        <p><b></p>Aplicaciones masivas:</b> La IA se ha integrado en casi todos los aspectos de la vida cotidiana, desde asistentes virtuales
+                        como Alexa y Google Assistant, hasta recomendaciones personalizadas en plataformas como Netflix y Spotify.
+                        Además, empresas como Tesla están desarrollando coches autónomos utilizando IA.
+
+                       <p></p><b> Desarrollos recientes:</b> En los últimos años, tecnologías como los Modelos Generativos (como
+                        GPT-3, GPT-4 de OpenAI) y transformers han avanzado enormemente el campo de la IA, permitiendo la creación de contenido
+                        textual, la traducciónautomática, y el desarrollo de agentes conversacionales cada vez más sofisticados.
+
+                        <p></p><b>Futuro de la IA</b>
+
+                        <p></p>El futuro de la IA es incierto, pero las expectativas incluyen avances en IA explicativa, donde
+                        las máquinas no solo toman decisiones, sino que pueden explicar cómo llegaron a ellas; la inteligencia artificial general (AGI), que
+                        se refiere a máquinas que poseen capacidades cognitivas comparables a las de los humanos; y IA ética, para asegurar
+                        que el desarrollo y el uso de estas tecnologías sean responsables.
+
+                        <p></p>Además, se están explorando aplicaciones en campos como la medicina (IA para diagnóstico y
+                        tratamiento), la educación personalizada, la robótica avanzada, y los sistemas autónomos de decisión.
+
+                       <p> En resumen, la historia de la inteligencia artificial es un viaje lleno de avances
+                        significativos, decepciones y resurgimientos, pero lo que es claro es que la IA está modelando rápidamente 
+                        el presente y el futuro de la tecnología yla sociedad.</p>
+
+                    <center><img width="800"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi7aIdwMXaU86WBUwJ6ddv3C_ziEHKemt7pA&s"
+                            </center>
+                        <hr>
+
+
+                        <!--Termina Historia-->
+
+                        <!--Comienza-->
+
+                        <center>
+                            <h2>Donde podemos aplicar la inteligencia artificial</h2>
+                        </center>
+
+                        La inteligencia artificial (IA) se puede aplicar prácticamente en todos los sectores de la
+                        sociedad, gracias a
+                        su capacidad para analizar grandes volúmenes de datos, reconocer patrones, aprender de la
+                        experiencia y
+                        automatizar tareas complejas.
+                        A continuación te explico las principales áreas de aplicación de la IA, con ejemplos concretos:
+                        <hr>
+
+                        <center>
+                            <h3>🏥 1. Medicina y Salud
+                        </center>
+                        </h3>
+
+                        La IA está revolucionando la atención médica en diagnóstico, tratamiento y gestión hospitalaria.
+
+                        Aplicaciones:
+
+                        Diagnóstico asistido: IA que analiza radiografías, tomografías o resonancias (como los sistemas
+                        de Google
+                        DeepMind o IBM Watson Health) para detectar enfermedades como cáncer o neumonía.
+
+                        Medicina personalizada: Algoritmos que predicen qué tratamientos funcionarán mejor para cada
+                        paciente según su
+                        genética.
+
+                        Asistentes virtuales médicos: Chatbots que responden preguntas sobre síntomas o recuerdan tomar
+                        medicamentos.
+
+                        Gestión hospitalaria: Optimización de recursos, programación de cirugías o control de
+                        inventarios.
+
+                        <center><img width="600"
+                                src="https://tecscience.tec.mx/es/wp-content/uploads/sites/8/2024/12/medicina-de-precision.jpg"
+                                </center>
+                            <hr>
+
+                            <center>
+                                <h3>🚗 2. Transporte y Movilidad
+                            </center>
+                            </h3>
+
+                            La IA hace posible una movilidad más segura, rápida y eficiente.
+
+                            Aplicaciones:
+
+                            Coches autónomos: Vehículos que se conducen solos, como los de Tesla o Waymo, utilizando
+                            sensores, cámaras y
+                            redes neuronales.
+
+                            Tráfico inteligente: Sistemas que ajustan semáforos o rutas para reducir congestión y
+                            accidentes.
+
+                            Drones: Utilizados en entregas, vigilancia o rescates.
+
+                            <center><img width="600"
+                                    src="https://media.es.wired.com/photos/67f92da46276c9ad529d03f1/16:9/w_1216,h_684,c_limit/Cybertruck%20long%20range.png"
+                                    </center>
+                                <hr>
+
+                                <center>
+                                    <h3>🏭 3. Industria y Manufactura
+                                </center>
+                                </h3>
+
+                                En la industria, la IA mejora la eficiencia, reduce costos y evita errores.
+
+                                Aplicaciones:
+
+                                Mantenimiento predictivo: La IA predice cuándo una máquina va a fallar antes de que
+                                ocurra.
+
+                                Control de calidad: Cámaras con visión artificial que detectan defectos en productos.
+
+                                Robots inteligentes: Colaboran con humanos en fábricas (robots colaborativos o cobots).
+                                <center><img width="600"
+                                        src="https://d2n4wb9orp1vta.cloudfront.net/cms/brand/PT-Mex/2021-PT-Mex/gettyimages-664141678.jpg;maxWidth=1200"
+                                        </center>
+                                    <hr>
+
+                                    <center>
+                                        <h3>💼 4. Negocios y Finanzas
+                                    </center>
+                                    </h3>
+
+                                    En el mundo empresarial, la IA ayuda a tomar decisiones estratégicas basadas en
+                                    datos.
+
+                                    Aplicaciones:
+
+                                    Análisis de datos y predicciones: Algoritmos que anticipan tendencias de mercado o
+                                    comportamiento de
+                                    clientes.
+
+                                    Atención al cliente: Chatbots que responden preguntas y gestionan solicitudes 24/7.
+
+                                    Detección de fraudes: La IA analiza transacciones en tiempo real para identificar
+                                    comportamientos
+                                    sospechosos.
+
+                                    Automatización contable: Programas que procesan facturas o clasifican gastos
+                                    automáticamente.
+                                    <center><img width="600"
+                                            src="https://economiasimple.net/wp-content/uploads/2023/11/funcionamiento-trading.jpg"
+                                            </center>
+                                        <hr>
+
+                                        <center>
+                                            <h3>🧠 5. Educación
+                                        </center>
+                                        </h3>
+
+                                        La IA personaliza la enseñanza y apoya tanto a estudiantes como a profesores.
+
+                                        Aplicaciones:
+
+                                        Tutorías personalizadas: Plataformas que adaptan el contenido al ritmo y nivel
+                                        del estudiante.
+
+                                        Corrección automática: Sistemas que evalúan exámenes o trabajos escritos.
+
+                                        Análisis de desempeño: IA que identifica estudiantes en riesgo de bajo
+                                        rendimiento.
+
+                                        Chatbots educativos: Asistentes virtuales que responden preguntas sobre tareas o
+                                        temas de estudio.
+                                        <center><img width="600"
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmZUkRQxKtO80XWcxF0R5zWHNlFvrdB5AL2g&s"
+                                                </center>
+                                            <hr>
+
+                                            <center>
+                                                <h3>🌍 6. Medio ambiente y sostenibilidad
+                                            </center>
+                                            </h3>
+
+                                            La IA puede ayudar a enfrentar los grandes desafíos ambientales del planeta.
+
+                                            Aplicaciones:
+
+                                            Predicción climática: Modelos que anticipan fenómenos extremos (huracanes,
+                                            incendios).
+
+                                            Optimización energética: Algoritmos que reducen el consumo de electricidad
+                                            en edificios y fábricas.
+
+                                            Monitoreo ambiental: IA que analiza imágenes satelitales para detectar
+                                            deforestación, contaminación o
+                                            pérdida de
+                                            biodiversidad.
+
+                                            <center><img width="600"
+                                                    src="https://radiosantarosa.com.pe/wp-content/uploads/2025/06/ia-medio-ambiente-portada-1-jpg-1.webp"
+                                                    </center>
+                                                <hr>
+
+                                                <center>
+                                                    <h3>🎮 7. Entretenimiento y Medios
+                                                </center>
+                                                </h3>
+
+                                                La IA ha transformado cómo se crean y consumen los contenidos.
+
+                                                Aplicaciones:
+
+                                                Recomendaciones personalizadas: En Netflix, Spotify o YouTube, la IA
+                                                sugiere contenido según tus
+                                                gustos.
+
+                                                Creación de arte, música y escritura: Herramientas como DALL·E o ChatGPT
+                                                generan texto, imágenes o
+                                                música.
+
+                                                Videojuegos: Personajes no jugadores (NPCs) más realistas e
+                                                inteligentes.
+
+                                                Producción audiovisual: IA que edita videos, mejora sonido o crea
+                                                efectos visuales.
+
+                                                <center><img width="600"
+                                                        src="https://catnessgames.com/wp-content/uploads/2024/12/tipos-videojuegos-consolas-y-plataformas.jpg"
+                                                        </center>
+                                                    <hr>
+
+
+                                                    <center>
+                                                        <h3>🛒 8. Comercio y Marketing
+                                                    </center>
+                                                    </h3>
+
+                                                    La IA optimiza la experiencia del cliente y mejora las estrategias
+                                                    de venta.
+
+                                                    Aplicaciones:
+
+                                                    Publicidad dirigida: Análisis de datos para mostrar anuncios
+                                                    personalizados.
+
+                                                    Gestión de inventario: Predicción de la demanda de productos.
+
+                                                    Asistentes virtuales de compra: Bots que ayudan a elegir productos o
+                                                    responder preguntas.
+
+                                                    Análisis de sentimientos: IA que mide la opinión del público sobre
+                                                    una marca o producto.
+
+                                                    <center><img width="600"
+                                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0MFCIDzwPvOkX-7TfsKkIOumqSGaS_79BcA&s"
+                                                            </center>
+                                                        <hr>
+
+                                                        <center>
+                                                            <h3>🏛️ 9. Gobierno y Seguridad
+                                                        </center>
+                                                        </h3>
+
+                                                        Los gobiernos y fuerzas de seguridad también usan IA para
+                                                        mejorar servicios y proteger a los
+                                                        ciudadanos.
+
+                                                        Aplicaciones:
+
+                                                        Ciudades inteligentes: Gestión del tráfico, alumbrado y
+                                                        servicios públicos mediante IA.
+
+                                                        Seguridad pública: Detección de comportamientos sospechosos
+                                                        mediante cámaras inteligentes.
+
+                                                        Procesamiento de documentos: Automatización de trámites y
+                                                        análisis de datos administrativos.
+
+                                                        Prevención de delitos cibernéticos: IA que analiza patrones de
+                                                        ataques informáticos.
+                                                        <center><img width="600"
+                                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCnjU9VoI34vR5u8Oh5nscEBlr8_EyoyjEeg&s"
+                                                                </center>
+                                                            <hr>
+
+                                                            <center>
+                                                                <h3>⚙️ 10. Ciencia y Tecnología
+                                                            </center>
+                                                            </h3>
+
+                                                            La IA acelera la investigación científica y el desarrollo
+                                                            tecnológico.
+                                                            Aplicaciones:
+                                                            Descubrimiento de fármacos: Algoritmos que predicen la
+                                                            eficacia de nuevas moléculas.
+                                                            complejos.
+
+                                                            Exploración espacial: Robots y sistemas de navegación
+                                                            autónomos (como los de Marte).
+
+                                                            <center><img width="600"
+                                                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfcxeP5Q6XU8HL9t5ckBSaxE19GgUmg6-7ng&s"
+                                                                    </center>
+                                                                <hr>
+                                                                <center>
+                                                                    <h3>
+                                                                        La IA y sus problematicas
+                                                                    </h3>
+                                                                </center>
+
+                                                                <p>
+                                                                    La inteligencia artificial a lo largo del tiempo se
+                                                                    ah incluido en varios debates eticos
+                                                                    pues estan las personas
+                                                                    que defienden la IA como algo inovador y funcional
+                                                                    pero hay otras personas que ven la IA
+                                                                    como una amenaza
+                                                                    y ven varios problemas en ella como esta pueda
+                                                                    seguir evolucionando pueda dejar a muchas
+                                                                    personas sin trabajo
+                                                                    entre todo esto te presento algunas de las
+                                                                    problematicas que la gente ve en la IA
+                                                                </p>
+
+                                                                <center>
+                                                                    <h3>
+                                                                        🧠 1. Sesgos y discriminación algorítmica
+                                                                    </h3>
+                                                                </center>
+                                                                <p>
+                                                                    Descripción:
+                                                                    Los modelos de IA aprenden de datos creados por
+                                                                    humanos, que pueden contener prejuicios
+                                                                    raciales, de género, sociales o culturales. Esto
+                                                                    hace que la IA repita o amplifique esos
+                                                                    sesgos.
+
+                                                                    Ejemplos:
+
+                                                                    Un sistema de reclutamiento que favorece a hombres
+                                                                    sobre mujeres.
+
+                                                                    Un reconocimiento facial que falla más en rostros de
+                                                                    personas negras o asiáticas.
+
+                                                                    Algoritmos de crédito que discriminan por código
+                                                                    postal o nivel socioeconómico.
+
+                                                                    Consecuencias:
+                                                                    Injusticia social, pérdida de confianza en la
+                                                                    tecnología y discriminación automatizada
+
+
+                                                                    <center>
+                                                                        <img width="400"
+                                                                            src="https://www.upf.edu/documents/229891609/294987972/discriminacio.jpg/a7cad1e5-7f9c-2394-efc0-d99d324e5611?t=1753964935981">
+                                                                    </center>
+
+                                                                </p>
+
+                                                                <center>
+                                                                    <h3>
+                                                                        🕵️‍♂️ 2. Privacidad y vigilancia masiva
+                                                                    </h3>
+                                                                </center>
+
+                                                                <p>
+                                                                    Descripción:
+                                                                    La IA utiliza enormes cantidades de datos personales
+                                                                    (imágenes, voz, ubicación, mensajes).
+                                                                    Esto plantea el riesgo de una sociedad vigilada y de
+                                                                    la pérdida del control sobre la
+                                                                    información individual.
+
+                                                                    Ejemplos:
+
+                                                                    Cámaras con IA para identificar rostros en espacios
+                                                                    públicos.
+
+                                                                    Aplicaciones que rastrean comportamiento sin
+                                                                    consentimiento.
+
+                                                                    Recolección de datos biométricos en redes sociales.
+
+                                                                    Consecuencias:
+                                                                    Pérdida de privacidad, manipulación, abuso de poder
+                                                                    y vulneración de derechos humanos
+
+                                                                    <center>
+                                                                        <img width="400"
+                                                                            src="https://www.segurilatam.com/wp-content/uploads/sites/5/2022/12/robo-de-informacion.jpg">
+                                                                    </center>
+                                                                </p>
+
+                                                                <center>
+                                                                    <h3>
+                                                                        ⚙️ 3. Desempleo y automatización laboral
+                                                                    </h3>
+                                                                </center>
+
+                                                                <p>
+                                                                    Descripción:
+                                                                    La automatización inteligente puede reemplazar a
+                                                                    trabajadores en múltiples sectores:
+                                                                    fábricas, transporte, atención al cliente,
+                                                                    redacción, diseño, etc.
+
+                                                                    Ejemplos:
+
+                                                                    Robots industriales que sustituyen obreros.
+
+                                                                    Chatbots que reemplazan agentes de servicio.
+
+                                                                    IA generativas que crean textos o imágenes en
+                                                                    segundos.
+
+                                                                    Consecuencias:
+                                                                    Desigualdad económica, desempleo estructural y
+                                                                    necesidad urgente de reentrenar a la fuerza
+                                                                    laboral.
+
+                                                                    <center>
+                                                                        <img width="500"
+                                                                            src="https://portalred365.com.mx/wp-content/uploads/2025/10/tasa-de-desempleo-en-mexico-bajo-en-agosto-g.jpeg">
+                                                                    </center>
+                                                                </p>
+
+                                                                <center>
+                                                                    <h3>
+                                                                        🧬 4. Falta de transparencia y explicabilidad
+                                                                    </h3>
+                                                                </center>
+
+                                                                <p>
+                                                                    Descripción:
+                                                                    Muchos modelos de IA (especialmente las redes
+                                                                    neuronales profundas) son cajas negras:
+                                                                    producen resultados sin poder explicar cómo llegaron
+                                                                    a ellos.
+
+                                                                    Ejemplos:
+
+                                                                    Un algoritmo médico sugiere un tratamiento sin
+                                                                    justificarlo.
+
+                                                                    Un sistema judicial predice reincidencia sin mostrar
+                                                                    su razonamiento.
+
+                                                                    Consecuencias:
+                                                                    Desconfianza, imposibilidad de auditar decisiones y
+                                                                    riesgo de errores injustificados
+
+                                                                    <center>
+                                                                        <img width="500"
+                                                                            src="https://media.licdn.com/dms/image/v2/D4D12AQHvl2XNGv-X8g/article-cover_image-shrink_600_2000/B4DZYXvAwEG8AQ-/0/1744154922899?e=2147483647&v=beta&t=8qGLmaPBvW4QVmZj2kY3-XhNUBHofWWLkMQK47ilXJE"
+                                                                            </center>
+                                                                </p>
+
+                                                                <center>
+                                                                    <h3>
+                                                                        ⚔️ 5. Desinformación, manipulación y “deepfakes
+                                                                    </h3>
+                                                                </center>
+
+                                                                <p>
+                                                                    Descripción:
+                                                                    La IA generativa puede crear textos, imágenes,
+                                                                    audios y videos falsos que parecen reales,
+                                                                    lo que facilita la propagación de información
+                                                                    engañosa.
+
+                                                                    Ejemplos:
+
+                                                                    Videos falsos de políticos o celebridades.
+
+                                                                    Noticias inventadas difundidas por bots.
+
+                                                                    Imágenes o audios creados para difamar o manipular
+                                                                    elecciones.
+
+                                                                    Consecuencias:
+                                                                    Crisis de confianza en la información, daño
+                                                                    reputacional, y amenaza a la democracia
+
+                                                                    Este ultimo suele ser de los mas peligrosos pues
+                                                                    actualmente existen muchos programas
+                                                                    de inteligencia artificial que replican o crean
+                                                                    videos de celebridades y de muchas
+                                                                    personas
+                                                                    haciendolo muy real y que puedas llegar a caer en
+                                                                    estafas o manipulacines
+                                                                    pues muchas veces estan tan bien hechos que es muy
+                                                                    dificil de saber si es real
+                                                                    o no y mas para una persona que no este
+                                                                    familiarizada con la IA
+
+                                                                    <center>
+                                                                        <img width="500"
+                                                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKXH5hKz11F8H2g_MwkOJWpxQ1NWc3quT22A&s">
+                                                                    </center>
+                                                                </p>
+
+                                                                <hr>
+
+                                                                <center>
+                                                                    <h2>Mapeo de imagen</h2>
+                                                                </center>
+
+
+                                                                <img class="img"
+                                                                    src="https://phoenixnap.com/glossary/wp-content/uploads/2024/07/what-is-ai-as-a-service.jpg"
+                                                                    alt="Info de la IA" usemap="#carparts-wiki">
+
+                                                                <map name="carparts-wiki">
+
+                                                                    <area shape="rect" coords="20, 150, 100, 250"
+                                                                        href="https://www.unesco.org/es/artificial-intelligence"
+                                                                        alt="Unesco"
+                                                                        title="Mas sobre la inteligencia artificial">
+
+                                                                    <area shape="rect" coords="150, 100, 350, 350"
+                                                                        href="https://www.oasiscom.com/blog/inteligencia-artificial/?gad_source=1&gad_campaignid=22318502581&gbraid=0AAAAADldWRma_T4RplKnvEStPBSk7nHgX&gclid=EAIaIQobChMInf-hiJThkAMVCAutBh3YPQbHEAAYASAAEgJrr_D_BwE"
+                                                                        alt="Oasis" title="El avance de la IA">
+
+                                                                    <area shape="circle" coords="400, 400, 60"
+                                                                        href="https://www.europarl.europa.eu/topics/es/article/20200827STO85804/que-es-la-inteligencia-artificial-y-como-se-usa"
+                                                                        alt="Parlamento" title="El uso de la ia">
+
+                                                                    <area shape="default"
+                                                                        href="https://www.isdi.education/es/blog/desventajas-de-la-inteligencia-artificial"
+                                                                        alt="isdi" title="El problema de la ia">
+
+                                                                </map>
+
+
+                                                                <!--Termina-->
+
+    </section>
+
+    <section id="comunicasion">
+
+        <h2>Comunicasion</h2>
+
+        <h1>
+            <center>¿Que son las comunicacines?</center>
+        </h1>
+
+        <p>Las comunicaciones son el proceso de transmitir información, ideas o mensajes entre un emisor y un
+            receptor mediante un código
+            compartido, mientras que la tecnología son los conocimientos, técnicas y dispositivos que hacen posible
+            y
+            mejoran este proceso,
+            particularmente las Tecnologías de la Información y la Comunicación (TIC), que usan aparatos
+            electrónicos
+            como teléfonos y computadoras
+            para almacenar, procesar y compartir datos a nivel global, volviendo la comunicación más rápida,
+            eficiente y
+            bidireccional.</p>
+
+        <p><b>Características de la comunicación</b></p>
+
+        <p> A grandes rasgos, la comunicación se caracteriza por:Presencia de un emisor y un receptor. Para que se
+            produzca
+            la comunicación, debe haber alguien que emita un mensaje y alguien que lo reciba.
+            Intercambio de información. Los participantes transmiten mensajes para expresar conocimientos, experiencias,
+            sentimientos, entre otros.
+            Transmisión inmediata o diferida. Puede establecerse de manera directa e inmediata, es decir, cara a cara, y
+            también puede darse de manera indirecta y diferida, por ejemplo, a través de medios como una carta, un
+            correo
+            electrónico o un mensaje de voz.
+            Posibilidad de retroalimentación. Puede incluir el proceso de retroalimentación, en el que los roles del
+            receptor y del emisor se intercambian porque el receptor le contesta al emisor.
+            Búsqueda de respuesta. Si bien puede tener muy variados propósitos, la comunicación casi siempre tiene el
+            objetivo de provocar una respuesta en el o los interlocutores.
+            Organización social. Sirve para que los seres humanos puedan establecer reglas e interactuar de forma
+            ordenada
+            dentro de una sociedad.</p>
+
+        <p><b>Tipos de comunicación</b></p>
+        La comunicación puede clasificarse, de acuerdo con los elementos que se emplean para transmitir el mensaje, en
+        comunicación verbal y comunicación no verbal.
+
+        <p><b>Comunicación verbal</b></p>
+        La comunicación verbal es la que se da mediante palabras, es decir, signos lingüísticos. Además, puede ser:
+
+        <p><b>Comunicación oral.</b></p>
+        Se realiza a través de la palabra hablada, ya sea cara a cara o con algún medio
+        auditivo, como el teléfono, los mensajes de voz o la radio.
+
+        <P><b> Comunicación escrita.</b></P>
+        Tiene lugar a través de la palabra escrita o cualquier otro código escrito (por
+        ejemplo, un pictograma). Suele ser diferida en el tiempo y el espacio, y es duradera.
+
+
+        <p><b>Comunicación no verbal</b>
+            es aquella que no depende de la palabra para transmitir un mensaje, sino de
+            gestos, movimientos, sonidos o imágenes, y puede ser voluntaria o involuntaria. Están en esta categoría:</p>
+
+        <p>La comunicación de los animales.</p>
+        <p>La comunicación paralingüística (producida por los sonidos que complementan la comunicación verbal).</p>
+        <p>La comunicación kinésica (producida por los movimientos corporales).</p>
+        <p>La comunicación proxémica (producida por la distancia entre emisor y receptor).</p>
+
+        <p>En la comunicación, se puede distinguir los siguientes elementos:</p>
+
+        <p><b>Emisor.</b> Es el participante que inicia el acto comunicativo a través de la producción y transmisión de
+            un
+            mensaje. Por ejemplo: un hablante, un locutor de radio o un animal que gruñe.</p>
+
+        <p><b>Receptor.</b> Es el participante que capta el mensaje y es capaz de decodificarlo y comprenderlo. Por
+            ejemplo:
+            alguien que escucha hablar a otra persona o un animal que percibe el gruñido de otro.</p>
+
+        <p><b> Mensaje.</b> Es la información que se transmite. Por ejemplo: una petición de ayuda o una publicidad
+            radial.</p>
+
+        <p><b>Código.</b> Es el sistema de signos y reglas utilizado para elaborar el mensaje. Por ejemplo: el idioma
+            español o
+            las señales de humo. El lenguaje oral o escrito es el principal código utilizado por los seres humanos, pero
+            no
+            es el único, ya que existen otros tipos, como las señales de tránsito, los gestos que expresan significados
+            compartidos o los sonidos musicales.</p>
+
+        <p><b>Canal.</b> Es el medio físico empleado para transmitir el mensaje. Remite tanto al fenómeno natural (el
+            aire por el
+            que viajan los sonidos) como al dispositivo tecnológico empleado (el papel, la televisión, la radio). Por
+            ejemplo: el aire por el que se transmiten las palabras o una computadora.</p>
+
+        <p><b>Contexto.</b> Es la situación o el conjunto de circunstancias en las que se produce el evento
+            comunicativo. Influye
+            en la producción, la transmisión y la interpretación del mensaje. Por ejemplo: una oficina donde una persona
+            le
+            pide ayuda a otra o una situación cotidiana en la que una persona está escuchando la radio.</p>
+
+        <center><img width="500"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7ALSFJcKnzWV3QvssETm98ljPFjU5sAssFQ&s"
+                alt="">
+        </center>
+    </section>
+
+    <section id="medicina">
+        <h2>Medicina</h2>
+        <h1>
+            <center>¿Que es las Medicina?</center>
+        </h1>
+        <p>La medicina es la ciencia y práctica que se dedica a la prevención, diagnóstico, tratamiento y cura de
+            enfermedades y afecciones del
+            cuerpo humano. La tecnología está íntimamente relacionada con la medicina, pues permite el desarrollo de
+            herramientas y métodos para mejorar
+            la eficacia y el acceso a los servicios de salud. Ejemplos de esta relación incluyen la inteligencia
+            artificial para diagnósticos, la
+            telemedicina para consultas a distancia, la robótica para cirugías, y la genómica para la medicina
+            personalizada.</p>
+
+        ¿Cuál es la importancia de la Medicina?
+
+        <p> Como si no fuera claro, porque es importante la medicina, juega un papel fundamental en la sociedad. Es una
+            de
+            las profesiones que atiende y protege la salud de
+            las personas desde antes de nacer hasta el día de su muerte. ¿De qué manera está involucrada la medicina a
+            lo
+            largo de todas las etapas de la vida?</p>
+
+        <p>En la concepción: en el caso de una pareja con esterilidad, la medicina les ofrece a ambos la oportunidad de
+            tener hijos propios. En este caso, la medicina
+            está superando y tratando un problema de naturaleza.
+
+        <p>Durante el embarazo: con la carrera de medicina se protege tanto a la madre como al embrión y al feto,
+            dándole a
+            conocer a la futura madre los cuidados que debe
+            tener, la dieta y los ejercicios que deberá manejar luego de convertirse en mamá. Así mismo, se mantiene el
+            embarazo en constante chequeo durante los 9 meses de su duración,
+            se le hacen sus ecografías y se prepara todo lo concerniente para un parto saludable y sin contratiempos.
+
+        <p></p>Durante el parto: se atiende a la madre y su hijo, bien sea por cesárea o parto natural.
+
+        <p></p>Después del parto: se practican múltiples exámenes al recién nacido, para diagnosticar en él su correcto
+        desarrollo y condiciones de salud.
+
+        <p></p>Al crecer: los niños, desde su nacimiento y hasta los 6 años, son atendidos por médicos pediatras, La
+        importancia de estudiar medicina, es que son quienes explican cómo
+        alimentarlos, cuidarlos y controlar y chequear su salud.
+
+        <p></p>Durante la infancia y adolescencia: se hacen seguimientos periódicos que permitan tener una vida
+        saludable,
+        también se pueden descubrir enfermedades genéticas y tratarlas a tiempo.
+
+        <p></p>En la adultez: en los casos de enfermedad y como forma de prevención, la medicina busca la mejoría y
+        curación,
+        mediante tratamientos quirúrgicos o médicos.
+
+        <p></p>En la muerte: para identificar causas y brindar también prevención de la enfermedad a su familia.
+
+
+        <p></p>Las 24 ramas o especializaciones médicas
+
+        <p></p>1. Clínica
+        La medicina centrada en la clínica es la que aparece en el imaginario colectivo cuando hablamos de esta ciencia.
+        Se trata del tipo de medicina en el que el profesional tiene un trato directo con el paciente, realiza
+        diagnóstico y propone y pone en práctica un tratamiento. Incluye la mayoría de especializaciones y suele ser la
+        base de la que se parte para redirigir hacia otro tipo de profesionales cuando no es posible un tratamiento
+        directo por su parte.
+
+        <p></p> 2. Quirúrgica
+        La medicina quirúrgica es aquella que se dedica principalmente al tratamiento de un problema previamente
+        diagnosticado, aplicando generalmente una metodología invasiva en que los profesionales trabajan de manera
+        directa alterando el organismo, sea retirando o extirpando alguna parte problemática o colocando dispositivos
+        que puedan mejorar su funcionamiento.
+
+        <p></p> 3. Médico-quirúrgica
+        Podríamos entender este tipo de medicina como una mezcla de las dos anteriores, en que se emplean tanto
+        procedimientos quirúrgicos como clínicos. Es el caso de algunas especialidades muy reconocidas, como la
+        oftalmología.
+
+        <p></p>4. Laboratorio
+        Dentro de esta categoría podemos encontrar todas aquellas ramas que se centran no en proporcionar un trato
+        directo al paciente, sino que trabajan a partir del análisis o bien de muestras de elementos como sangre, orina,
+        heces, fluidos sexuales, secreciones o biopsias o bien del de pruebas diagnósticas como por ejemplo las
+        resonancias magnéticas, las placas o los TACs. Si bien no solemos pensar en ellos cuando hablamos de médicos,
+        sin su servicio no sería posible ni diagnosticar ni tratar una gran cantidad de problemas.
+
+        <p></p> 5. Medicina forense
+        Generalmente, cuando hablamos de medicina, pensamos en la que se dedica a diagnosticar y tratar enfermedades en
+        pacientes vivas, pero lo cierto es que también existe un tipo de medicina cuyo objetivo es valorar la existencia
+        de lesiones derivadas de actividades delictivas o investigar las causas de la muerte de una persona.
+
+        <p></p> 6. Medicina laboral
+        La medicina laboral es aquella que se dedica a analizar y tratar las enfermedades y lesiones que pueden ocurrir
+        dentro del ámbito laboral.
+
+        <p></p>7. Medicina preventiva
+        Este tipo de medicina, si bien por lo general suele emplearse como una parte del proceso propio de la clínica,
+        es la que se especializa no en el tratamiento de una situación actual sino en procurar evitar que una enfermedad
+        pueda llegar a surgir, conseguir detectarla cuanto antes para que no llegue a generar un problema grave o que en
+        el caso de una enfermedad ya presente evitar que pueda empeorar o reaparecer.
+
+        <p></p>8. Medicina deportiva
+        El tipo de medicina dedicada al ámbito del deporte, suele tratar problemas de tipo muscular y óseo, así como de
+        ligamentos y tendones. También pueden tratar otros problemas, así como realizar tareas de prevención.
+
+        <p></p>9. Medicina integrativa
+        Un tipo de medicina que pretende aunar los conocimientos de la medicina científica y los de las terapias
+        alternativas y naturales, buscando en su ejercicio una integración de ambos tipos de conocimiento en la práctica
+        médica.
+
+        <p></p>10. Medicina complementaria
+        Se entiende como medicina complementaria un tipo de medicina en la que se emplean junto a las metodologías
+        propias y habituales de la medicina junto con otras prácticas tradicionales que pretenden servir de complemento
+        y no de sustituto de las primeras.
+
+        <p></p>11. Dentro de los anteriores tipos de medicina podemos encontrar especializaciones centradas en
+        diferentes
+        aspectos tales como la zona del organismo en que centran sus estudios o la edad en la que se focalizan.
+
+        <p></p>12. Medicina general y de familia
+        La medicina general y de familia es la rama base de la medicina, la cual no se encuentra especializada en un
+        sector de edad o en una parte del organismo en concreto sino que tiene un conocimiento general de la mayoría de
+        ámbitos y suele dar respuesta a las problemáticas de salud más generales. Se trata por lo general del médico al
+        que vemos en primer lugar.En caso necesario pudiendo derivar a algún especialista.
+
+        <p></p>13. Pediatría
+        La pediatría es una de las ramas o tipos de medicina a los que más importancia suele darse, dado que se hace
+        cargo de los problemas de salud propios de uno de los grupos de edad más vulnerables: la infancia. Se trata de
+        una especialidad peculiar, ya que además de que los niños requieren un tipo de trato más particular debe tenerse
+        en cuenta el importante papel de los progenitores del paciente tanto en la obtención de e información como en la
+        toma de cualquier
+        decisión y la posible pérdida de información derivada de las dificultades para expresar el tipo de malestar por
+        parte del menor.
+
+        <p></p>14. Cardiología
+        La cardiología es probablemente una de las especialidades más conocidas de la medicina, siendo la subdisciplina
+        encargada de trabajar y estudiar el sistema cardiovascular, en concreto el corazón. Desde arritmias a infartos,
+        pasando por problemas congénitos o enfermedades del corazón, son algunos de sus ámbitos de aplicación. En
+        algunos casos puede vincularse a otra especialidad, la cirugía cardiovascular.
+
+        <p></p>15. Neumología
+        Se trata de la rama de la medicina que trabaja con los problemas típicos del sistema respiratorio, especialmente
+        los pulmones. Ejemplos de problemas típicos en los que pueden estar vinculados son la fibrosis quística o la
+        EPOC.
+
+        <p></p>16. Ginecología y obstetricia
+        La ginecología es la especialidad médica centrada en los problemas y la salud del sistema reproductor femenino,
+        tanto a nivel genital como mamario.
+
+        <p></p>En lo que respecta a la obstetricia, se dedica al estudio y mantenimiento de la salud en el proceso del
+        embarazo
+        y el parto, así como el posparto. Su trabajo es tanto con la madre como con el niño o niña.
+
+        <p></p>17. Otorrinolaringología
+        La otorrinolaringología se dedica al estudio del sistema auditivo, la laringe y la faringe, trabajando problemas
+        que pueden ir desde infecciones a pérdidas de audición.
+
+        <p></p>18. Urología
+        La urología es la rama de la medicina que trabaja y estudia con el sistema reproductor y genitourinario
+        masculino, tratando problemas que pueden abarcar zonas como los testículos, el pene, las glándulas suprarrenales
+        o el peritoneo. En ocasiones es confundida con la proctología.
+
+        <p></p> 19. Toxicología
+        Esta rama de la medicina se encarga de estudiar y trabajar con todos aquellos casos en que se ha producido algún
+        tipo de intoxicación, sea esta alimentaria o por consumo de drogas o por contacto con algún tóxico.
+
+        <p></p>20. Hematología
+        Un tipo de especialidad médica centrada en los problemas vinculados con la sangre.
+
+        <p></p> Oftalmología
+        La rama de la medicina que estudia el funcionamiento y los trastornos y enfermedades vinculados a los órganos
+        visuales: los ojos.
+
+        <p></p>22. Radiología
+        Una de las especialidades que menos se ajustan al funcionamiento habitual de lo que la mayoría considera un
+        médico, la radiología consiste en el estudio y realización de pruebas diagnósticas con técnicas que emplean
+        algún tipo de radicación.
+
+        <p></p>23. Reumatología
+        Esta rama de la medicina se encarga del estudio, diagnóstico y tratamiento de los problemas vinculados a las
+        articulaciones y los músculos.
+
+        <p></p>24. Inmunología
+        Tal y como nos dice el nombre de esta especialidad, estamos ante la rama de la medicina centrada en el estudio
+        del sistema inmune y las problemáticas y enfermedades que puede tener, tratando problemas como la infección por
+        VIH o el lupus.</p>
+
+        <center><img width="500"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1uAPofHmFTE11xzKBBDZgTnxGA1AIrxDUw&s"
+                alt="">
+        </center>
+
+        <center>
+            <p><img alt="Cambiar imagen" height="400"
+                    onmouseout="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFpTKNxPpGSVgEqTOqdZW8QJaEmap9uUUDaw&s'"
+                    onmouseover="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGnURRSyNvJzbu1rrgkGl5hLTShukHGyXFkg&s';"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFpTKNxPpGSVgEqTOqdZW8QJaEmap9uUUDaw&s" />
+            </p>
+        </center>
+
+
+    </section>
+
+    <section id="biotecnologia">
+        <h2>Biotecnologia</h2>
+        <h1>
+            <center>¿Que es la Biotecnologia?</center>
+        </h1>
+
+        <p>La biotecnología es una disciplina científica que utiliza sistemas biológicos, organismos vivos o sus
+            derivados para crear o modificar
+            productos o procesos con fines específicos. En esencia, combina la biología con la tecnología para
+            transformar la vida y mejorar la calidad
+            de vida. Se aplica en diversos campos como la medicina, la agricultura, la industria y el medio
+            ambiente.
+        </p>
+
+        <p></p>La biotecnología es un área multidisciplinar que combina biología, química, ingeniería y otras disciplinas para
+        desarrollar productos y procesos utilizando organismos vivos o sus componentes. De esta forma, la biotecnología
+        desarrolla y aplica tecnología que permite utilizar la maquinaria biológica de seres vivos, para crear productos
+        y servicios específicos de interés para el ser humano.
+
+        <p></p>Gracias a su multidisciplinariedad y su naturaleza trasversal, la biotecnología tiene aplicaciones en múltiples
+        sectores, como la salud humana y animal, desarrollando nuevos enfoques para el tratamiento de enfermedades; la
+        agricultura y la alimentación, con el desarrollo de cultivos más sostenibles y alimentos mejorados; en
+        aplicaciones industriales, por ejemplo plásticos biodegradables y biocombustibles; o en el área medioambiental a
+        través de la biorremediación, como el reciclaje, el tratamiento de residuos y la limpieza de sitios contaminados
+        por actividades industriales. De este modo, la biotecnología ofrece soluciones innovadoras que tienen un impacto
+        positivo y directo sobre la vida de las personas, así como en la sostenibilidad del planeta.
+
+       <p></p><b> Tipos de biotecnología</b>
+
+        <p></p>La biotecnología se clasifica en diferentes tipos según el campo de aplicación, cada uno identificado con un
+        color específico en España. La asociación con estos colores está extendida en España, pero no así de forma
+        generalizada a nivel internacional más allá de los principales tipos como la biotecnología blanca, roja o verde.
+
+        <p></p><b>Biotecnología médica (roja):</b> prevención, diagnóstico y tratamiento de enfermedades.
+       
+          <p></p><b>Biotecnología agraria (verde):</b> mejora del rendimiento de cultivos fundamentalmente mediante la edición genética
+        de las plantas.
+
+       <p></p><b> Biotecnología alimentaria (amarilla):</b> utilización de organismos vivos o compuestos mejorados genéticamente para
+        optimizar el proceso de producción de alimentos y/o mejorar sus propiedades nutricionales y organolépticas.
+        
+        <p></p><b>Biotecnología animal (marrón):</b> producción de alimentos, fármacos y vacunas para animales.
+        
+        <p></p><b>Biotecnología marina (azul): </b>encargada de la preservación de los ecosistemas acuáticos y de la obtención de
+        nuevos productos a partir de recursos marinos y fluviales.
+        
+        <p></p><b>Biotecnología industrial (blanca):</b> diseño y gestión de procesos biotecnológicos industriales.
+       
+        <p></p><b>Biotecnología medioambiental (gris):</b> recoge las aplicaciones de la biotecnología centradas en la protección del
+        medioambiente.
+        
+        <p></p><b>Impacto de la biotecnología en España</b>
+       
+        <p></p>El Informe AseBio proporciona una visión detallada y actualizada del estado y las tendencias del sector
+        biotecnológico en España. Elaborado de forma anual por AseBio, incluye información sobre el número de empresas
+        biotecnológicas, su distribución geográfica, áreas de actividad, inversión en I+D, empleo, exportaciones,
+        colaboraciones internacionales, y otros datos relevantes para la industria biotecnológica española.
+
+       
+       <p></p><b>Historia y evolución de la biotecnología</b> 
+
+        <p></p>La historia y evolución de la biotecnología se remonta a miles de años atrás, cuando los humanos comenzaron a
+        utilizar microorganismos para la fermentación de alimentos y la producción de bebidas alcohólicas. Sin embargo,
+        el desarrollo moderno de la biotecnología como disciplina científica comenzó a principios del siglo XX y ha
+        experimentado avances significativos en las últimas décadas. Aquí recogemos un resumen de los hitos importantes
+        en la historia y evolución de la biotecnología:
+
+        <p></p>Siglo XX temprano: En la década de 1920, Alexander Fleming descubre la penicilina, el primer antibiótico, a
+        partir del hongo Penicillium. Este descubrimiento marcó el comienzo de la era de los medicamentos modernos y
+        sentó las bases para el desarrollo posterior de la microbiología y la biotecnología farmacéutica.
+
+        <p></p>Décadas de 1950 y 1960: Durante este período, se desarrollan técnicas de cultivo de células y tejidos, que son
+        fundamentales para la ingeniería genética y la biotecnología moderna. También se comienzan a utilizar enzimas
+        para la síntesis orgánica en la industria química, dando lugar a la biotecnología industrial.
+
+        <p></p>Década de 1970: Se produce un hito significativo con el desarrollo de la tecnología de ADN recombinante, que
+        permite a los científicos manipular genes y transferir material genético entre organismos. La creación de la
+        primera bacteria recombinante en 1973 por Herbert Boyer y Stanley Cohen marca el comienzo de la era de la
+        ingeniería genética.
+
+        <p></p>Década de 1980: Se establecen las primeras compañías biotecnológicas comerciales, y se lanzan al mercado los
+        primeros medicamentos producidos mediante ingeniería genética, como la insulina humana recombinante y los
+        interferones. La biotecnología agrícola también comienza a emerger con la investigación sobre cultivos
+        transgénicos y la ingeniería de plantas.
+
+        <p></p>Década de 1990: La biotecnología experimenta un rápido crecimiento y diversificación. Se desarrollan técnicas de
+        secuenciación de ADN de alto rendimiento, lo que lleva al proyecto del Genoma Humano y a avances significativos
+        en la genómica y la medicina personalizada. También se aplican enfoques biotecnológicos en áreas como la
+        biorremediación ambiental, la bioenergía y la terapia génica.
+
+        <p></p>Años 2000: En 2003 culmina la secuenciación completa del genoma humano, proporcionando una valiosa información
+        sobre la estructura y función de los genes humanos, así como su relación con enfermedades y condiciones médicas.
+        El desarrollo de la técnica CRISPR-Cas9 en 2012 revolucionó el campo de la biotecnología al permitir la edición
+        precisa y eficiente del genoma de organismos vivos, incluidos los humanos.
+
+        <p></p>Hasta 2024: La biotecnología ha sido crucial en la pandemia del COVID-19, desde el desarrollo de vacunas como
+        las de ARNm hasta pruebas de diagnóstico precisas como PCR y LAMP. También ha contribuido en el desarrollo de
+        terapias y tratamientos, así como en la secuenciación genómica del virus para identificar variantes.
+
+        <p></p>Se espera que la biotecnología siga desempeñando un papel crucial en la resolución de desafíos globales en
+        salud, alimentación, energía y medio ambiente en el futuro.
+
+        <p></p>La biotecnología moderna se basa en la ingeniería genética y otras técnicas para modificar organismos y usarlos
+        en la obtención de bienes y servicios, con aplicaciones en medicina, agricultura y medio ambiente. A diferencia
+        de la biotecnología tradicional, que es más artesanal, la moderna utiliza herramientas como la manipulación
+        directa del ADN, siendo la producción de insulina y los cultivos genéticamente modificados ejemplos comunes.
+        Aunque ofrece grandes beneficios como alimentos más seguros y una agricultura más sostenible, también presenta
+        desafíos éticos, de seguridad ambiental y de acceso equitativo.
+        Características principales
+        
+        <p></p>Ingeniería genética: Implica la manipulación directa del ADN para introducir o modificar características
+        específicas en un organismo.
+       
+       <p></p> Uso de organismos: Utiliza células vivas y moléculas derivadas de ellas para crear productos o mejorar
+        características.
+       
+       <p></p> Aplicaciones: Se aplica en diversos sectores, incluyendo la producción de medicamentos, alimentos, la
+        remediación de suelos y aguas, y la creación de materiales.
+        Ejemplos
+       
+        <p></p>Medicina: Producción de insulina humana mediante bacterias genéticamente modificadas, en lugar de obtenerla de
+        animales.
+       
+        <p></p>Agricultura: Creación de plantas con resistencia a plagas o mayor valor nutricional, como el arroz con
+        pro-vitamina A.
+       
+       <p></p> Medio ambiente: Uso de plantas para remediar suelos contaminados (fitorremediación).
+       
+       <p></p> Edición génica: Tecnologías como CRISPR/Cas9 que permiten modificar el ADN de manera precisa, rápida y
+        eficiente.
+        Beneficios
+        
+        <p></p>Salud: Permite la producción de fármacos y terapias más eficaces.
+       
+        <p></p>Alimentación: Mejora la calidad nutricional y la seguridad de los alimentos, así como la resistencia de los
+        cultivos.
+        
+        <p></p>Medio ambiente: Contribuye a una agricultura menos contaminante y a la limpieza de suelos y aguas.
+        Desafíos y riesgos
+       
+        <p></p>Ética: Plantea dilemas éticos relacionados con la modificación genética.
+        
+        <p></p>Medio ambiente: Existe un riesgo potencial de impactos ambientales negativos si no se gestiona adecuadamente.
+        
+        <p></p>Acceso: El acceso a sus avances puede ser desigual debido a cuestiones económicas y de distribución.
+       
+        <center><img width="500"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv5vidQM-zR5RDyYbNV__RI3JUYQx09_i3AA&s"
+                alt="">
+        </center>
+
+        <p></p><b><i>Aplicaciones de la biotecnología en la actualidad</i></b>
+
+        <p></p>La biotecnología es un área multidisciplinar que se aplica a la medicina, la farmacia, la agricultura, las
+        ciencias de los alimentos y las ciencias forestales. Con ello se consiguen medicamentos mejorados, cultivos más
+        productivos, incluso materiales más resistentes, entre otros. Veamos algunas aplicaciones:
+
+       
+       
+        <p></p><b><i>Biotecnología ambiental</i></b>
+
+        <p></p>La biotecnología ambiental sirve para crear cultivos más eficientes, así como optimizar los recursos naturales.
+        Se aprovechan algunas facultades de los microorganismos, hongos, enzimas y plantas para recuperar ecosistemas
+        contaminados.
+
+       
+        <p></p><b><i>Biotecnología médica</i></b>
+
+        <p></p>Supone un gran avance a la hora de guiar la prevención, el diagnóstico y el tratamiento de enfermedades basadas
+        en los genes de una persona. La biotecnología médica permite crear medicina personalizada, teniendo en cuenta
+        las características de cada paciente y su patología.
+
+        
+       <p></p><b><i> Biotecnología industrial</i></b>
+
+        <p></p>Utiliza enzimas y microorganismos para desarrollar nuevos materiales y procesos biotecnológicos. Se puede
+        aplicar a envases, hidrocarburos, productos químicos, cosmética, biocombustibles, combustibles renovables,
+        textiles, y mucho más.
+
+       
+        <p></p><b><i>Biotecnología vegetal</i></b>
+
+        <p></p>Esta rama de la biotecnología consiste en mejorar las variedades de las plantas, para evitar plagas de insectos,
+        enfermedades y malas hierbas que puedan devastar el cultivo. También se emplea para la fitorremediación, una
+        combinación de biotecnología vegetal y ambiental, que utiliza plantas para descontaminar los suelos, depurar las
+        aguas y limpiar el aire interior. 
+
+        
+       <p></p> <b><i>Biotecnología molecular</i></b>
+
+        <p></p>Modifica los sistemas biológicos para que se apliquen a otro campo, como la bioquímica, la genética o la
+        biología celular. Lo que permite estudiar las interacciones de los diferentes sistemas de las células,
+        incluyendo el ADN con el ARN, la síntesis de proteínas y el metabolismo.
+
+        
+       <p></p><b><i>Biotecnología animal</i></b>
+
+        <p></p>La biotecnología animal estudia tres grandes áreas: la genómica animal, la clonación de animales y los animales
+        transgénicos. El objetivo es promover la salud humana, mejorar la salud de los animales terrestres, desarrollar
+        alimentos mejorados y contribuir a conservar el medioambiente.
+
+        
+        <p></p><b><i>Biotecnología farmacéutica</i></b>
+
+       <p></p> Esta técnica de la biotecnología examina los procesos biológicos de células, bacterias u otros microorganismos.
+        Gracias a ello, se desarrollan productos farmacéuticos para investigar y curar enfermedades, como los
+        antibióticos, las terapias genéticas, las vacunas, etc. 
+
+
+        <p></p><b><i>Biotecnología marina</i></b>
+
+        <p></p>Es una de las ramas más recientes de estudio en la biotecnología. Se encarga exclusivamente de estudiar los
+        seres que habitan en los ecosistemas marinos para cuidar las especies y su ecosistema. Las áreas de actuación
+        más destacadas son la contaminación de los océanos y la algología, que permitiría obtener ingredientes
+        cosméticos y alimentarios a partir de algas. 
+
+        Tipos de biotecnología según su área de investigación
+
+       <p></p> La biotecnología abarca diversas ramas que aplican la ciencia y la tecnología para resolver problemas en áreas
+        clave como la salud, la industria y el medioambiente. A continuación, exploramos los principales tipos de
+        biotecnología según su área de investigación y cuáles son sus principales características:
+
+       <p></p> Biotecnología roja: se refiere a la rama sanitaria, cuyo fin es elaborar vacunas, fármacos, medicina
+        regenerativa, terapia génica y nuevas técnicas de análisis y diagnóstico.
+        
+        <p></p>Biotecnología verde: se aplica a los procesos del sector agrícola para nutrir los cultivos, protegerlos de
+        eventos climatológicos extremos y combatir las plagas.
+        
+        <p></p>Biotecnología blanca: está vinculada al sector industrial. Estudia los procesos de fabricación y el desarrollo
+        de biocombustibles para que la industria sea más respetuoso con el medioambiente y eficiente.
+        
+        <p></p>Biotecnología amarilla: investiga la producción de alimentos para reducir los niveles de grasas saturadas,
+        modificar el aporte calórico o incluir suplementos vitamínicos.
+        
+        <p></p>Biotecnología marrón: está enfocada en el tratamiento de suelos áridos y desérticos, a partir de especies
+        altamente resistentes a suelos salinos y secos.
+        
+        <p></p>Biotecnología azul: estudia todos los procesos relacionados con los mares y los océanos para obtener productos
+        cosméticos, sanitarios o de acuicultura.
+       
+       <p></p> Biotecnología gris: se centra en la conservación y recuperación de los ecosistemas naturales que han sido
+        alterados por contaminantes.
+       
+       <p></p> Biotecnología dorada: está relacionada con la bioinformática. Se encarga del análisis de datos en los procesos
+        biológicos (secuencias de ADN, aminoácidos, etc).
+       
+       <p></p> Biotecnología negra: se vincula al bioterrorismo y guerras biológicas. Se investigan microorganismos virulentos
+        que podrían convertirse en armas biológicas, o contrarrestar los efectos nocivos de las mismas.
+       
+        <p></p>Biotecnología naranja: difunde información interesante sobre la biotecnología para atraer a futuros científicos.
+       
+       <p></p> Biotecnología morada: estudia todos los aspectos legales relacionados con la biotecnología (medidas de
+        seguridad, protección de datos, patentes, etc.).
+
+        <HEAD>
+
+            <TITLE>Libro de Visitas</TITLE>
+
+        </HEAD>
+
+        <BODY>
+
+            <H2>Libro de visitas</H2>
+
+            <P>
+
+            <FORM ACTION="mailto:email" METHOD="POST" ENCTYPE="text/plain">
+
+                Tu nombre:
+
+                <BR><INPUT TYPE="text" NAME="Nombre">
+
+                <P>Escribe tus comentarios: <BR>
+
+                    <TEXTAREA NAME "Comentarios" ROWS "6" COLS="40">
+
+<P>
+
+<TEXTAREA>
+
+<INPUT TYPE="submit" VALUE="Enviar datos">
+
+<INPUT TYPE="reset" VALUE="Borrar datos">
+
+</FORM>
+
+<P>
+
+<HR>
+
+</BODY>
+
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Puedes comunicarte con nosotros por correo electrónico o redes sociales.</p>
+        <hr>
+        <h3>
+            <p>Creado por Juan Carlos</p>
+        </h3>
+        <hr>
+        <h3>
+            <p>juan.soltero5593@alumnos.udg.mx</p>
+        </h3>
+        <hr>
+        <h3>
+            <p>Contacto: 3312299173</p>
+        </h3>
+        <hr>
+    </section>
+
+    <!-- Barra de satisfacción -->
+    <section id="feedback" class="feedback">
+        <h2>Deja tu opinión</h2>
+        <p>Valora tu experiencia:</p>
+        <div class="stars" id="stars">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+        </div>
+        <textarea id="comentario" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                    <button onclick="enviarFeedback()">Enviar</button>
+    </section>
+
+    <script>
+        // ====== Menú lateral ======
+        function openMenu() {
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+        function closeMenu() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+
+        // ====== Modo oscuro ======
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark");
+        }
+
+
+
+        // ====== Buscador con scroll ======
+        function buscar() {
+            const query = document.getElementById("searchInput").value.toLowerCase();
+            const secciones = document.querySelectorAll("section");
+            let encontrado = false;
+
+            secciones.forEach(sec => {
+                const texto = sec.innerText.toLowerCase();
+                if (texto.includes(query) && query !== "") {
+                    sec.scrollIntoView({ behavior: "smooth", block: "start" });
+                    encontrado = true;
+                }
+            });
+
+            if (!encontrado && query !== "") {
+                alert("No se encontró información con: " + query);
+            }
+        }
+
+        // ====== Limpiar buscador ======
+        function limpiarBuscador() {
+            document.getElementById("searchInput").value = "";
+            document.getElementById("searchInput").focus();
+            toggleClearButton();
+        }
+
+        // ====== Mostrar/ocultar botón ❌ ======
+        function toggleClearButton() {
+            const input = document.getElementById("searchInput");
+            const clearBtn = document.getElementById("clearBtn");
+            clearBtn.style.display = input.value.trim() !== "" ? "inline-block" : "none";
+        }
+
+
+        // ====== Bienvenida y despedida ======
+        window.onload = () => {
+            alert("👋 ¡Bienvenido a mi página!");
+        };
+
+        window.onbeforeunload = () => {
+            return "⚠️ ¿Seguro que quieres salir? ¡Gracias por visitarnos!";
+        };
+
+        // ====== Feedback ======
+        const stars = document.querySelectorAll("#stars span");
+        stars.forEach(star => {
+            star.addEventListener("click", () => {
+                stars.forEach(s => s.classList.remove("selected"));
+                star.classList.add("selected");
+                let prev = star.previousElementSibling;
+                while (prev) {
+                    prev.classList.add("selected");
+                    prev = prev.previousElementSibling;
+                }
+            });
+        });
+
+        function enviarFeedback() {
+            const rating = document.querySelectorAll("#stars .selected").length;
+            const comentario = document.getElementById("comentario").value;
+
+            if (rating === 0 && comentario.trim() === "") {
+                alert("⚠️ Por favor, selecciona una puntuación o escribe un comentario.");
+                return;
+            }
+
+            const feedback = {
+                estrellas: rating,
+                comentario: comentario,
+                fecha: new Date().toLocaleString()
+            };
+
+            fetch("guardar_feedback.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(feedback)
+            })
+                .then(res => res.json())
+                .then(data => alert("✅ " + data.message))
+                .catch(err => alert("❌ Error al guardar feedback: " + err));
+
+            document.getElementById("comentario").value = "";
+            stars.forEach(s => s.classList.remove("selected"));
+        }
+    </script>
+
+</body>
+</style>
+</head>
+
+</html>
+
+https://concepto.de/comunicacion/
+https://www.unbosque.edu.co/blog-universidad-el-bosque/que-es-la-medicina
+https://iqs.edu/es/blog/campos-de-aplicacion-de-la-biotecnologia-conoce-mas-sobre-ella/
+https://definicion.de/mecanica/
